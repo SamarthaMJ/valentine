@@ -19,7 +19,7 @@ body {
   overflow: hidden;
 }
 
-/* ---------- FLOATING HEARTS ---------- */
+/* FLOATING HEARTS */
 .heart {
   position: fixed;
   bottom: -10px;
@@ -28,15 +28,11 @@ body {
   animation: floatUp linear infinite;
   pointer-events: none;
 }
-
 @keyframes floatUp {
-  to {
-    transform: translateY(-110vh) rotate(360deg);
-    opacity: 0;
-  }
+  to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
 }
 
-/* ---------- CARD ---------- */
+/* CARD */
 .card {
   background: white;
   padding: 40px 30px;
@@ -50,15 +46,20 @@ body {
 
 h1 { color: #ff4d6d; }
 
-.warning {
-  margin-top: 10px;
-  font-size: 15px;
+/* WARNING LIST */
+.warning ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+.warning li {
+  margin: 6px 0;
+  font-size: 16px;
   font-weight: 600;
   color: #ff4d6d;
-  min-height: 22px;
 }
 
-/* ---------- BUTTONS ---------- */
+/* BUTTONS */
 .buttons {
   display: flex;
   justify-content: space-around;
@@ -71,18 +72,19 @@ button {
   border-radius: 30px;
   border: none;
   cursor: pointer;
+  margin: 6px;
 }
 
-#yes {
-  background: #ff4d6d;
-  color: white;
+#yes { background: #ff4d6d; color: white; }
+#no { background: #ccc; }
+
+.choice {
+  display: block;
+  width: 100%;
+  background: #ffd1dc;
 }
 
-#no {
-  background: #ccc;
-}
-
-/* ---------- JUMPSCARE ---------- */
+/* JUMPSCARE */
 #jumpscare {
   position: fixed;
   inset: 0;
@@ -91,18 +93,13 @@ button {
   z-index: 9999;
   animation: flash 0.12s infinite;
 }
-
-#jumpscare.glitch {
-  animation: glitchBg 0.2s infinite;
-}
-
+#jumpscare.glitch { animation: glitchBg 0.2s infinite; }
 #jumpscare img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   animation: glitchImg 0.2s infinite;
 }
-
 #jumpscare-text {
   position: absolute;
   bottom: 40px;
@@ -115,7 +112,7 @@ button {
   animation: shake 0.08s infinite;
 }
 
-/* ---------- SCREEN CRACK ---------- */
+/* SCREEN CRACK */
 #crack {
   position: fixed;
   inset: 0;
@@ -131,22 +128,18 @@ button {
   z-index: 10000;
 }
 
-/* ---------- CONFETTI ---------- */
+/* CONFETTI */
 .confetti {
   position: fixed;
   top: -10px;
   font-size: 22px;
   animation: fall linear forwards;
 }
-
 @keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0;
-  }
+  to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
 
-/* ---------- ANIMATIONS ---------- */
+/* ANIMATIONS */
 @keyframes shake {
   0% { transform: translate(0); }
   25% { transform: translate(-6px, 6px); }
@@ -154,19 +147,16 @@ button {
   75% { transform: translate(-6px, -6px); }
   100% { transform: translate(0); }
 }
-
 @keyframes flash {
   0% { background: black; }
   50% { background: #2b0000; }
   100% { background: black; }
 }
-
 @keyframes glitchBg {
   0% { filter: hue-rotate(0deg); }
   50% { filter: hue-rotate(90deg); }
   100% { filter: hue-rotate(0deg); }
 }
-
 @keyframes glitchImg {
   0% { transform: translate(0); }
   20% { transform: translate(-10px, 5px); }
@@ -175,29 +165,6 @@ button {
   80% { transform: translate(8px, -8px); }
   100% { transform: translate(0); }
 }
-
-/* ---------- FINAL ---------- */
-#final {
-  display: none;
-  text-align: center;
-  z-index: 2;
-}
-
-#final h1 {
-  font-size: 36px;
-  color: #ff4d6d;
-}
-.warning ul {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0 0;
-}
-
-.warning li {
-  margin: 6px 0;
-  font-size: 16px;
-  color: #ff4d6d;
-}
 </style>
 </head>
 
@@ -205,18 +172,17 @@ button {
 
 <div id="crack"></div>
 
-<!-- CARD -->
+<!-- MAIN CARD -->
 <div class="card" id="card">
   <h1>Will you be my Valentine? 💘</h1>
 
-  <!-- FRONT PAGE WARNING TEXT -->
-<div class="warning" id="warning">
-  <ul>
-    <li>Don’t dare to click NO…</li>
-    <li>Don’t ever dare to click NO for the second time</li>
-    <li>Click NO the 3rd time at your own risk 😈</li>
-  </ul>
-</div>
+  <div class="warning">
+    <ul>
+      <li>Don’t dare to click NO…</li>
+      <li>Don’t ever dare to click NO for the second time</li>
+      <li>Click NO the 3rd time at your own risk 😈</li>
+    </ul>
+  </div>
 
   <div class="buttons">
     <button id="yes">Yes 💖</button>
@@ -224,15 +190,54 @@ button {
   </div>
 </div>
 
+<!-- YES FLOW -->
+<div class="card" id="yesFlow" style="display:none;">
+
+  <!-- STEP 1 -->
+  <div id="step1">
+    <h1>Are you sure you want to grow old with me? 🥺</h1>
+    <button class="goStep2">Yes</button>
+    <button class="goStep2">Yes</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="step2" style="display:none;">
+    <h1>
+      I am sometimes an overthinker,<br>
+      overpossessive, busy<br>
+      and a hard person to love.
+      <br><br>
+      Are you sure?
+    </h1>
+
+    <button id="openChoices">Choose your answer 💭</button>
+
+    <div id="choices" style="display:none; margin-top:15px;">
+      <button class="choice">Yes</button>
+      <button class="choice">Of course</button>
+      <button class="choice">Obviously</button>
+    </div>
+  </div>
+
+  <!-- FINAL -->
+  <div id="finalYes" style="display:none;">
+    <h1>I knew you'd say YES 💖</h1>
+    <p>
+      Since you are my Valentine from<br>
+      <b>half a decade minus 2</b>.
+      <br><br>
+      For saying yes,<br>
+      this gift has been ordered for you cutie 🎁
+    </p>
+    <img src="static/media/gift (1).jpeg" style="width:100%;border-radius:15px;">
+  </div>
+
+</div>
+
 <!-- JUMPSCARE -->
 <div id="jumpscare">
   <img id="ghostImg" src="">
   <div id="jumpscare-text"></div>
-</div>
-
-<!-- FINAL -->
-<div id="final">
-  <h1>I knew you'd say YES 💖🥰</h1>
 </div>
 
 <!-- AUDIO -->
@@ -243,13 +248,12 @@ button {
 <script>
 const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
+const card = document.getElementById("card");
+const yesFlow = document.getElementById("yesFlow");
 const jumpscare = document.getElementById("jumpscare");
 const ghostImg = document.getElementById("ghostImg");
 const scareText = document.getElementById("jumpscare-text");
 const scream = document.getElementById("scream");
-const card = document.getElementById("card");
-const final = document.getElementById("final");
-const warning = document.getElementById("warning");
 const crack = document.getElementById("crack");
 
 let scareCount = 0;
@@ -260,31 +264,21 @@ const scares = [
   { img: "static/media/ghost3.jpg", text: "YOUR RISK 👹" }
 ];
 
-// FLOATING HEARTS
+// Floating hearts
 setInterval(() => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerText = "💖";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (Math.random() * 4 + 6) + "s";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 10000);
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerText = "💖";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.animationDuration = (Math.random() * 4 + 6) + "s";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 10000);
 }, 500);
 
 // NO CLICK
 noBtn.addEventListener("click", () => {
   scareCount++;
-
-  // FRONT PAGE TEXT ONLY
-  if (scareCount === 2)
-    warning.innerText = "Don’t ever dare to click NO again…";
-  if (scareCount >= 3)
-    warning.innerText = "Click NO at your own risk 😈";
-
-  // Phone vibration (Android)
-  if (navigator.vibrate) {
-    navigator.vibrate([200, 100, 200, 100, 300]);
-  }
+  if (navigator.vibrate) navigator.vibrate([200,100,200,100,300]);
 
   const scare = scares[Math.min(scareCount - 1, scares.length - 1)];
   ghostImg.src = scare.img;
@@ -296,7 +290,7 @@ noBtn.addEventListener("click", () => {
 
   scream.currentTime = 0;
   scream.load();
-  scream.play().catch(() => {});
+  scream.play().catch(()=>{});
 
   setTimeout(() => {
     jumpscare.style.display = "none";
@@ -305,23 +299,44 @@ noBtn.addEventListener("click", () => {
   }, 4500);
 });
 
-// YES CLICK
+// YES FLOW
 yesBtn.addEventListener("click", () => {
   card.style.display = "none";
-  document.body.style.background =
-    "linear-gradient(135deg, #ffdde1, #ee9ca7)";
-  final.style.display = "block";
-
-  for (let i = 0; i < 80; i++) {
-    const span = document.createElement("span");
-    span.className = "confetti";
-    span.innerText = "💖";
-    span.style.left = Math.random() * 100 + "vw";
-    span.style.animationDuration = (Math.random() * 2 + 2) + "s";
-    document.body.appendChild(span);
-    setTimeout(() => span.remove(), 4000);
-  }
+  yesFlow.style.display = "block";
 });
+
+document.querySelectorAll(".goStep2").forEach(b =>
+  b.addEventListener("click", () => {
+    document.getElementById("step1").style.display = "none";
+    document.getElementById("step2").style.display = "block";
+  })
+);
+
+document.getElementById("openChoices").onclick = () => {
+  document.getElementById("choices").style.display = "block";
+  document.getElementById("openChoices").style.display = "none";
+};
+
+document.querySelectorAll(".choice").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.getElementById("step2").style.display = "none";
+    document.getElementById("finalYes").style.display = "block";
+    launchConfetti();
+  });
+});
+
+// Confetti
+function launchConfetti() {
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement("span");
+    c.className = "confetti";
+    c.innerText = "💖";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
+  }
+}
 </script>
 
 </body>
